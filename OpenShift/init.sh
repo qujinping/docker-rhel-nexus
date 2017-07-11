@@ -20,7 +20,6 @@ SCRIPT_BASE_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # Login Information
 OPENSHIFT_CLI_USER="admin"
-OPENSHIFT_CLI_PASSWORD="admin"
 OPENSHIFT_NEXUS_PROJECT="nexus"
 
 # Login to OpenShift
@@ -28,7 +27,7 @@ echo
 echo "Logging into OpenShift..."
 echo "=================================="
 echo
-oc login -u ${OPENSHIFT_CLI_USER} -p ${OPENSHIFT_CLI_PASSWORD}
+oc login -u ${OPENSHIFT_CLI_USER} 
 
 # Create Nexus Project
 echo
@@ -41,7 +40,7 @@ echo
 echo "Processing Nexus Template..."
 echo "=================================="
 echo
-oc create -f "${SCRIPT_BASE_DIR}/nexus-rhel.json" -n ${OPENSHIFT_NEXUS_PROJECT}
+oc create -f "${SCRIPT_BASE_DIR}/nexus-centos" -n ${OPENSHIFT_NEXUS_PROJECT}
 
 echo
 echo "Starting Nexus binary build..."

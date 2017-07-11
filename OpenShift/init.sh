@@ -31,16 +31,17 @@ oc login -u ${OPENSHIFT_CLI_USER}
 
 # Create Nexus Project
 echo
-echo "Creating new Nexus Project (${OPENSHIFT_NEXUS_PROJECT})..."
+echo "Change to Nexus Project (${OPENSHIFT_NEXUS_PROJECT})..."
 echo "=================================="
 echo
-oc new-project ${OPENSHIFT_NEXUS_PROJECT}
+# oc new-project ${OPENSHIFT_NEXUS_PROJECT}
+oc project ${OPENSHIFT_NEXUS_PROJECT}
 
 echo
 echo "Processing Nexus Template..."
 echo "=================================="
 echo
-oc create -f "${SCRIPT_BASE_DIR}/nexus-centos" -n ${OPENSHIFT_NEXUS_PROJECT}
+oc create -f "${SCRIPT_BASE_DIR}/nexus-centos.json" -n ${OPENSHIFT_NEXUS_PROJECT}
 
 echo
 echo "Starting Nexus binary build..."

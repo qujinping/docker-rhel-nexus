@@ -96,33 +96,9 @@
                "description": "Custom hostname for service routes.  Leave blank for default hostname, e.g.: <application-name>.<project>.<default-domain-suffix>",
                "displayName": "Nexus instance hostname",
                "name": "APPLICATION_HOSTNAME"
-            },
-            {
-               "description": "Persistent Volume Size (512Mi, 5Gi,...)",
-               "displayName": "Persistent Volume Size",
-               "name": "SIZE",
-               "value": "2Gi",
-               "required": true
             }
          ],
          "objects": [
-            {
-               "kind": "PersistentVolumeClaim",
-               "apiVersion": "v1",
-               "metadata": {
-                  "name": "${APPLICATION_NAME}"
-               },
-               "spec": {
-                  "accessModes": [
-                     "ReadWriteOnce"
-                  ],
-                  "resources": {
-                     "requests": {
-                        "storage": "${SIZE}"
-                     }
-                  }
-               }
-            },
             {
                "kind": "DeploymentConfig",
                "apiVersion": "v1",
@@ -170,9 +146,7 @@
                         "volumes": [
                            {
                               "name": "nexus-data",
-                              "persistentVolumeClaim": {
-                                 "claimName": "${APPLICATION_NAME}"
-                              }
+                               emptyDir: {}
                            }
                         ],
                         "containers": [
